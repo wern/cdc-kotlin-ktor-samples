@@ -1,0 +1,187 @@
+{
+  "provider": {
+    "name": "GreetingProvider"
+  },
+  "consumer": {
+    "name": "GreetingConsumer"
+  },
+  "interactions": [
+    {
+      "description": "Abfrage eines existierenden Grusses",
+      "request": {
+        "method": "GET",
+        "path": "/greetings/casual"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset\u003dUTF-8"
+        },
+        "body": {
+          "greeting": {
+            "phrase": "Hey",
+            "type": "casual"
+          }
+        },
+        "matchingRules": {
+          "header": {
+            "Content-Type": {
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "application/json(;\\s?charset\u003d[\\w\\-]+)?"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        }
+      },
+      "providerStates": [
+        {
+          "name": "Es gibt einen casual Gruss"
+        }
+      ]
+    },
+    {
+      "description": "Loeschen eines Grusses",
+      "request": {
+        "method": "DELETE",
+        "path": "/greetings/formal"
+      },
+      "response": {
+        "status": 200
+      },
+      "providerStates": [
+        {
+          "name": "Es gibt einen formal Gruss"
+        }
+      ]
+    },
+    {
+      "description": "Abfrage aller Gruesse ohne vorhandene Daten",
+      "request": {
+        "method": "GET",
+        "path": "/greetings"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset\u003dUTF-8"
+        },
+        "body": {
+          "greetings": []
+        },
+        "matchingRules": {
+          "header": {
+            "Content-Type": {
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "application/json(;\\s?charset\u003d[\\w\\-]+)?"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        }
+      },
+      "providerStates": [
+        {
+          "name": "Es gibt keine Gruesse"
+        }
+      ]
+    },
+    {
+      "description": "Abfrage eines nicht existierenden Grusses",
+      "request": {
+        "method": "GET",
+        "path": "/greetings/formal"
+      },
+      "response": {
+        "status": 404
+      },
+      "providerStates": [
+        {
+          "name": "Es gibt keinen formal Gruss"
+        }
+      ]
+    },
+    {
+      "description": "Speichern eines neuen Grusses",
+      "request": {
+        "method": "PUT",
+        "path": "/greetings/formal",
+        "headers": {
+          "Content-type": "application/json; charset\u003dUTF-8",
+          "Content-Type": "application/json; charset\u003dUTF-8"
+        },
+        "body": {
+          "greeting": {
+            "phrase": "Good morning",
+            "type": "formal"
+          }
+        }
+      },
+      "response": {
+        "status": 200
+      },
+      "providerStates": [
+        {
+          "name": "Es gibt keinen formal Gruss"
+        }
+      ]
+    },
+    {
+      "description": "Abfrage aller Gruesse mit vorhandenen Daten",
+      "request": {
+        "method": "GET",
+        "path": "/greetings"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset\u003dUTF-8"
+        },
+        "body": {
+          "greetings": [
+            {
+              "phrase": "Good morning",
+              "type": "formal"
+            },
+            {
+              "phrase": "Hey",
+              "type": "casual"
+            }
+          ]
+        },
+        "matchingRules": {
+          "header": {
+            "Content-Type": {
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "application/json(;\\s?charset\u003d[\\w\\-]+)?"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        }
+      },
+      "providerStates": [
+        {
+          "name": "Es gibt zwei Gruesse"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    },
+    "pact-jvm": {
+      "version": "3.6.6"
+    }
+  }
+}

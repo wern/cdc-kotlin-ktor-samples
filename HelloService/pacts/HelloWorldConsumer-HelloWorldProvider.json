@@ -1,0 +1,31 @@
+{
+  "provider": {
+    "name": "HelloWorldProvider"
+  },
+  "consumer": {
+    "name": "HelloWorldConsumer"
+  },
+  "interactions": [
+    {
+      "description": "Abfrage von HelloWorld",
+      "request": {
+        "method": "GET",
+        "path": "/"
+      },
+      "response": {
+        "status": 200,
+        "body": {
+            "response": "Hello World"
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    },
+    "pact-jvm": {
+      "version": "3.6.6"
+    }
+  }
+}
